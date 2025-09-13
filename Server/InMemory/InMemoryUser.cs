@@ -5,7 +5,7 @@ namespace InMemory;
 
 public class InMemoryUser : UserInterface
 {
-    public List<User>? users { get; set; }
+    public List<User>? users { get; set; } = new List<User>();
     public Task<User> AddAsync(User user)
     {
         user.Id = users.Any()
@@ -18,7 +18,7 @@ public class InMemoryUser : UserInterface
     {
         User? userToRemove = users.SingleOrDefault(u => u.Id == id);
         if (userToRemove is null)
-        { throw new InvalidOperationException($"Post with ID '{id}' not found"); } users.Remove(userToRemove);
+        { throw new InvalidOperationException($"User with ID '{id}' not found"); } users.Remove(userToRemove);
         return Task.CompletedTask;
     }
 
@@ -37,7 +37,7 @@ public class InMemoryUser : UserInterface
     return Task.FromResult(user);
     }
 
-    public Task UpdateAsyncU(User user)
+    public Task UpdateAsync(User user)
     {
         User? existingUser = users.SingleOrDefault(u => u.Id == user.Id);
         if (existingUser is null)
