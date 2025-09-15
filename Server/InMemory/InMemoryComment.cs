@@ -5,7 +5,7 @@ namespace InMemory;
 
 public class InMemoryComment : CommentInterface
 {
-    public List<Comment>? comments { get; set;}
+    public List<Comment>? comments { get; set; } = new List<Comment>();
     public Task<Comment> AddAsync(Comment comment)
     {
         comment.Id = comments.Any()

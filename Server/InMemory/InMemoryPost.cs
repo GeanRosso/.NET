@@ -6,7 +6,7 @@ namespace InMemory;
 
 public class InMemoryPost : Postinterface
 {
-        private List<Post>? posts { get; set; }
+    private List<Post>? posts { get; set; } = new List<Post>();
 
     public Task<Post> AddAsync(Post post)
     {
