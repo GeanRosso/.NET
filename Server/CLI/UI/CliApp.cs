@@ -24,7 +24,7 @@ public class CliApp
         this.userInterface = userInterface;
         this.postinterface = postinterface;
         this.manageUserView = new ManageUserView(userInterface);
-        this.managerPostView = new ManagerPostView(postinterface);
+        this.managerPostView = new ManagerPostView(postinterface, commentInterface);
         this.manageCommentView = new ManageCommentView(commentInterface);
     }
 

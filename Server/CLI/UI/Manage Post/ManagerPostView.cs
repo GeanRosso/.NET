@@ -9,13 +9,15 @@ public class ManagerPostView
     private CreatePostView createPostView;
     private PostListView postListView;
     private ViewSinglePostView viewSinglePostView;
+    private CommentInterface commentInterface;
 
-    public ManagerPostView(Postinterface postInterface)
+    public ManagerPostView(Postinterface postInterface, CommentInterface commentInterface)
     {
         this.postInterface = postInterface;
+        this.commentInterface = commentInterface;
         this.createPostView = new CreatePostView(postInterface);
         this.postListView = new PostListView(postInterface);
-        this.viewSinglePostView = new ViewSinglePostView(postInterface);
+        this.viewSinglePostView = new ViewSinglePostView(postInterface, commentInterface);
     }
        
     public async Task ShowMenuAsync()
