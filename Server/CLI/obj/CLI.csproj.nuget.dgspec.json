@@ -29,8 +29,8 @@
               "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\Entities\\Entities.csproj": {
                 "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\Entities\\Entities.csproj"
               },
-              "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\InMemory\\InMemoryRepositories.csproj": {
-                "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\InMemory\\InMemoryRepositories.csproj"
+              "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\FileRepository\\FileRepository.csproj": {
+                "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\FileRepository\\FileRepository.csproj"
               },
               "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\RepositoryContracts\\RepositoryContracts.csproj": {
                 "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\RepositoryContracts\\RepositoryContracts.csproj"
@@ -678,14 +678,14 @@
         }
       }
     },
-    "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\InMemory\\InMemoryRepositories.csproj": {
+    "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\FileRepository\\FileRepository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\InMemory\\InMemoryRepositories.csproj",
-        "projectName": "InMemoryRepositories",
-        "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\InMemory\\InMemoryRepositories.csproj",
+        "projectUniqueName": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\FileRepository\\FileRepository.csproj",
+        "projectName": "FileRepository",
+        "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\FileRepository\\FileRepository.csproj",
         "packagesPath": "C:\\Users\\geanc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\InMemory\\obj\\",
+        "outputPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\FileRepository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\geanc\\AppData\\Roaming\\NuGet\\NuGet.Config"

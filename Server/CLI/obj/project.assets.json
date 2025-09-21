@@ -12,7 +12,7 @@
           "bin/placeholder/Entities.dll": {}
         }
       },
-      "InMemoryRepositories/1.0.0": {
+      "FileRepository/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
@@ -20,10 +20,10 @@
           "RepositoryContracts": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/InMemoryRepositories.dll": {}
+          "bin/placeholder/FileRepository.dll": {}
         },
         "runtime": {
-          "bin/placeholder/InMemoryRepositories.dll": {}
+          "bin/placeholder/FileRepository.dll": {}
         }
       },
       "RepositoryContracts/1.0.0": {
@@ -47,10 +47,10 @@
       "path": "../Entities/Entities.csproj",
       "msbuildProject": "../Entities/Entities.csproj"
     },
-    "InMemoryRepositories/1.0.0": {
+    "FileRepository/1.0.0": {
       "type": "project",
-      "path": "../InMemory/InMemoryRepositories.csproj",
-      "msbuildProject": "../InMemory/InMemoryRepositories.csproj"
+      "path": "../FileRepository/FileRepository.csproj",
+      "msbuildProject": "../FileRepository/FileRepository.csproj"
     },
     "RepositoryContracts/1.0.0": {
       "type": "project",
@@ -61,7 +61,7 @@
   "projectFileDependencyGroups": {
     "net10.0": [
       "Entities >= 1.0.0",
-      "InMemoryRepositories >= 1.0.0",
+      "FileRepository >= 1.0.0",
       "RepositoryContracts >= 1.0.0"
     ]
   },
@@ -93,8 +93,8 @@
             "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\Entities\\Entities.csproj": {
               "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\Entities\\Entities.csproj"
             },
-            "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\InMemory\\InMemoryRepositories.csproj": {
-              "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\InMemory\\InMemoryRepositories.csproj"
+            "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\FileRepository\\FileRepository.csproj": {
+              "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\FileRepository\\FileRepository.csproj"
             },
             "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\RepositoryContracts\\RepositoryContracts.csproj": {
               "projectPath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Server\\RepositoryContracts\\RepositoryContracts.csproj"
