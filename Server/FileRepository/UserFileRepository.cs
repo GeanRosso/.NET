@@ -22,7 +22,7 @@ public class UserFileRepository : UserInterface
     List<User>? users;
     try
     {
-        users = JsonSerializer.Deserialize<List<User>>(usersAsJson);
+        users = JsonSerializer.Deserialize<List<User>>(usersAsJson)!;
     }
     catch
     {
