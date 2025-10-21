@@ -3,4 +3,100 @@
 GET {{WebAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+
+### 
+POST {{WebAPI_HostAddress}}/User
+Content-Type: application/json
+
+{
+  "username": "john_doe",
+  "password": 1234
+}
+
+### 
+GET {{WebAPI_HostAddress}}/User
+
+### 
+GET {{WebAPI_HostAddress}}/User/1
+
+### 
+PUT {{WebAPI_HostAddress}}/User/1
+Content-Type: application/json
+
+{
+  "username": "john_doe_updated",
+  "password": 5678
+}
+
+### 
+DELETE {{WebAPI_HostAddress}}/User/1
+
+
+
+
+### 
+POST {{WebAPI_HostAddress}}/Post
+Content-Type: application/json
+
+{
+  "title": "My first post",
+  "body": "Hello world, this is my first post!",
+  "authorUserId": 1
+}
+
+### 
+GET {{WebAPI_HostAddress}}/Post
+
+### 
+GET {{WebAPI_HostAddress}}/Post/1
+
+### 
+GET {{WebAPI_HostAddress}}/Post?titleContains=hello&authorUserId=1
+
+### 
+PUT {{WebAPI_HostAddress}}/Post/1
+Content-Type: application/json
+
+{
+  "title": "My edited post",
+  "body": "This post has been updated!",
+  "authorUserId": 1
+}
+
+### 
+DELETE {{WebAPI_HostAddress}}/Post/1
+
+
+
+
+### 
+POST {{WebAPI_HostAddress}}/Comment
+Content-Type: application/json
+
+{
+  "postId": 1,
+  "authorUserId": 1,
+  "body": "Nice post!"
+}
+
+### 
+GET {{WebAPI_HostAddress}}/Comment
+
+### 
+GET {{WebAPI_HostAddress}}/Comment/1
+
+### 
+GET {{WebAPI_HostAddress}}/Comment?postId=1
+
+### 
+PUT {{WebAPI_HostAddress}}/Comment/1
+Content-Type: application/json
+
+{
+  "postId": 1,
+  "authorUserId": 1,
+  "body": "Edited comment text"
+}
+
+### 
+DELETE {{WebAPI_HostAddress}}/Comment/1
