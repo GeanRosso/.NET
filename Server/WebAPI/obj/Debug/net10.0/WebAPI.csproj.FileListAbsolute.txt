@@ -42,3 +42,5 @@ C:\Users\geanc\OneDrive\Área de Trabalho\Assigment01.Net\.NET\Server\WebAPI\bin
 C:\Users\geanc\OneDrive\Área de Trabalho\Assigment01.Net\.NET\Server\WebAPI\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\geanc\OneDrive\Área de Trabalho\Assigment01.Net\.NET\Server\WebAPI\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\geanc\OneDrive\Área de Trabalho\Assigment01.Net\.NET\Server\WebAPI\bin\Debug\net10.0\Users.json
+C:\Users\geanc\OneDrive\Área de Trabalho\Assigment01.Net\.NET\Server\WebAPI\bin\Debug\net10.0\comments.json
+C:\Users\geanc\OneDrive\Área de Trabalho\Assigment01.Net\.NET\Server\WebAPI\bin\Debug\net10.0\Posts.json

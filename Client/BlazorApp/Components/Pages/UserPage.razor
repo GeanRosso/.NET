@@ -1,0 +1,35 @@
+﻿@page "/user"
+@inject BlazorApp.Services.IUserService UserService
+@using ApiContracts.UserFolder
+
+<h3>Add User (Test)</h3>
+
+<button class="btn btn-primary" @onclick="CreateUser">Add User</button>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <p>@message</p>
+}
+
+@code {
+    private string? message;
+
+    private async Task CreateUser()
+    {
+        try
+        {
+            var user = new CreateUserDto
+            {
+                Username = "TestUser",
+                Password = 1234
+            };
+
+            var created = await UserService.AddUserAsync(user);
+            message = $"✅ User '{created.Username}' created successfully!";
+        }
+        catch (Exception ex)
+        {
+            message = $"❌ Error: {ex.Message}";
+        }
+    }
+}

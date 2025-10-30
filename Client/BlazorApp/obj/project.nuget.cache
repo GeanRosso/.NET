@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "lkEltXqg1CI=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\geanc\\OneDrive\\Área de Trabalho\\Assigment01.Net\\.NET\\Client\\BlazorApp\\BlazorApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\geanc\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.0-preview.7.25380.108\\microsoft.aspnetcore.app.internal.assets.10.0.0-preview.7.25380.108.nupkg.sha512"
+  ],
+  "logs": []
+}
