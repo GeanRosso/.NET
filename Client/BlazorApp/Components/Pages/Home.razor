@@ -1,34 +1,67 @@
 ﻿@page "/"
 @using ApiContracts.UserFolder
+@using System.Reflection
 @inject BlazorApp.Services.IUserService UserService
 
-<h1>Hello, world!</h1>
-<p>Welcome to your new app.</p>
 
-<hr />
 
-<h3>User quick test</h3>
-<button class="btn btn-primary" @onclick="CreateUser">Add User</button>
+<h3>Add User (Test)</h3>
+
+<div class="mb-3">
+  <label class="form-label">Username</label>
+  <input class="form-control" @bind="newUser.Username" placeholder="Enter username" />
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Password</label>
+  <input class="form-control" type="password" @bind="passwordInput" placeholder="Enter password" />
+</div>
+
+<button class="btn btn-primary" @onclick="CreateUser">Create User</button>
 
 @if (!string.IsNullOrEmpty(message))
 {
-    <p class="mt-2">@message</p>
+  <p>@message</p>
 }
 
 @code {
-    private string? message;
+   private string? message;
+    private CreateUserDto newUser = new()
+    {
+        Username = string.Empty,
+        Password = 0
+    };
+    private string? passwordInput;
 
     private async Task CreateUser()
     {
         try
         {
-            var dto = new CreateUserDto { Username = "TestUser", Password = 1234 };
-            var created = await UserService.AddUserAsync(dto);
+            // If your DTO expects a numeric password, convert it
+            if (int.TryParse(passwordInput, out int parsedPassword))
+            {
+                newUser.Password = parsedPassword;
+            }
+            else
+            {
+                message = "❌ Password must be a number.";
+                return;
+            }
+
+            var created = await UserService.AddUserAsync(newUser);
             message = $"✅ User '{created.Username}' created successfully!";
+            
+            // Clear input fields
+            newUser = new()
+            {
+                Username = string.Empty,
+                Password = 0
+            };
+            passwordInput = string.Empty;
         }
         catch (Exception ex)
         {
             message = $"❌ Error: {ex.Message}";
         }
-    }
+        }
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace ApiContracts.UserFolder;
+namespace ApiContracts.PostFolder;
 
 public class CreatePostDto
 {

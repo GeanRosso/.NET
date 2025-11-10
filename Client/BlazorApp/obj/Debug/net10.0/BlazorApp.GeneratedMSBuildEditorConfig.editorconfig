@@ -30,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/geanc/OneDrive/Área de Trabalho/Assigment01.Net/.NET/Client/BlazorApp/Components/Pages/CreatePost.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDcmVhdGVQb3N0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/geanc/OneDrive/Área de Trabalho/Assigment01.Net/.NET/Client/BlazorApp/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,6 +44,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/geanc/OneDrive/Área de Trabalho/Assigment01.Net/.NET/Client/BlazorApp/Components/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/geanc/OneDrive/Área de Trabalho/Assigment01.Net/.NET/Client/BlazorApp/Components/Pages/PostDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQb3N0RGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/geanc/OneDrive/Área de Trabalho/Assigment01.Net/.NET/Client/BlazorApp/Components/Pages/PostList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQb3N0TGlzdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/geanc/OneDrive/Área de Trabalho/Assigment01.Net/.NET/Client/BlazorApp/Components/Pages/UserPage.razor]

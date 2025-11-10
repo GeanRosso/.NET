@@ -12,24 +12,43 @@
 }
 
 @code {
-    private string? message;
+   private string? message;
+    private CreateUserDto newUser = new()
+    {
+        Username = string.Empty,
+        Password = 0
+    };
+    private string? passwordInput;
 
     private async Task CreateUser()
     {
         try
         {
-            var user = new CreateUserDto
+            // If your DTO expects a numeric password, convert it
+            if (int.TryParse(passwordInput, out int parsedPassword))
             {
-                Username = "TestUser",
-                Password = 1234
-            };
+                newUser.Password = parsedPassword;
+            }
+            else
+            {
+                message = "❌ Password must be a number.";
+                return;
+            }
 
-            var created = await UserService.AddUserAsync(user);
+            var created = await UserService.AddUserAsync(newUser);
             message = $"✅ User '{created.Username}' created successfully!";
+            
+            // Clear input fields
+            newUser = new()
+            {
+                Username = string.Empty,
+                Password = 0
+            };
+            passwordInput = string.Empty;
         }
         catch (Exception ex)
         {
             message = $"❌ Error: {ex.Message}";
         }
-    }
+}
 }

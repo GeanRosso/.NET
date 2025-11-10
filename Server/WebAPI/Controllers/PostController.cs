@@ -11,10 +11,12 @@ namespace WebAPI.Controllers
     public class PostController : ControllerBase
     {
         private readonly Postinterface postinterface;
+        private readonly UserInterface userinterface;
 
-        public PostController(Postinterface postinterface)
+        public PostController(Postinterface postinterface, UserInterface userInterface)
         {
             this.postinterface = postinterface;
+             this.userinterface =userInterface;
         }
     
      // POST /posts
@@ -30,16 +32,18 @@ namespace WebAPI.Controllers
 
             var created = await postinterface.AddAsync(post);
 
-           
+
             if (created.UserId is null || created.Title is null || created.Body is null)
                 return Problem("Post was created with null fields.", statusCode: 500);
 
+            var author = await userinterface.GetSingleAsync(created.UserId.Value);
             var result = new PostDto
             {
                 Id = created.Id,
                 Title = created.Title,
                 Body  = created.Body,
-                AuthorUserId = created.UserId.Value
+                AuthorUserId = created.UserId.Value,
+                AuthorName = author?.Username ?? "Unknown"
             };
 
            
@@ -61,19 +65,21 @@ namespace WebAPI.Controllers
             }
 
             if (p is null) return NotFound();
+            var author = await userinterface.GetSingleAsync(p.UserId ?? 0);
 
             return new PostDto
             {
                 Id = p.Id,
                 Title = p.Title ?? string.Empty,
-                Body  = p.Body ?? string.Empty,
-                AuthorUserId = p.UserId.GetValueOrDefault(0) 
+                Body = p.Body ?? string.Empty,
+                AuthorUserId = p.UserId.GetValueOrDefault(0),
+                AuthorName = author?.Username ?? "Unknown"
             };
         }
 
         // GET /posts?titleContains=...&authorUserId=1
         [HttpGet]
-        public ActionResult<IEnumerable<PostDto>> GetMany([FromQuery] string? titleContains, [FromQuery] int? authorUserId)
+        public async Task<ActionResult<IEnumerable<PostDto>>> GetMany([FromQuery] string? titleContains, [FromQuery] int? authorUserId)
         {
             var q = postinterface.GetManyAsync(); 
             if (!string.IsNullOrWhiteSpace(titleContains))
@@ -85,15 +91,21 @@ namespace WebAPI.Controllers
             if (authorUserId is not null)
                 q = q.Where(p => p.UserId == authorUserId.Value);
 
-            var list = q
-                .Select(p => new PostDto
-                {
-                    Id = p.Id,
-                    Title = p.Title ?? string.Empty,
-                    Body  = p.Body ?? string.Empty,
-                    AuthorUserId = p.UserId.GetValueOrDefault(0)
-                })
-                .ToList();
+           var list = new List<PostDto>();
+
+    foreach (var p in q)
+    {
+        var author = await userinterface.GetSingleAsync(p.UserId ?? 0);
+        list.Add(new PostDto
+        {
+            Id = p.Id,
+            Title = p.Title ?? string.Empty,
+            Body  = p.Body ?? string.Empty,
+            AuthorUserId = p.UserId.GetValueOrDefault(0),
+            AuthorName = author?.Username ?? "Unknown"
+        });
+    }
+
 
             return list;
         }
