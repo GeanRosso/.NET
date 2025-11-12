@@ -52,6 +52,20 @@ public class UserFileRepository : UserInterface
         await File.WriteAllTextAsync(filePath, usersAsJson);
     }
 
+    public async Task<User?> GetByUserNameAsync(string userName)
+    {
+          string usersAsJson = await File.ReadAllTextAsync(filePath);
+    List<User>? users = JsonSerializer.Deserialize<List<User>>(usersAsJson);
+
+    if (users == null || users.Count == 0)
+        return null;
+
+    // Find the first user with matching name (case-insensitive)
+    return users.FirstOrDefault(u => 
+        !string.IsNullOrEmpty(u.Username) && 
+        u.Username.Equals(userName, StringComparison.OrdinalIgnoreCase));
+    }
+
     public IQueryable<User> GetManyAsync()
     {
         string usersAsJson = File.ReadAllText(filePath);

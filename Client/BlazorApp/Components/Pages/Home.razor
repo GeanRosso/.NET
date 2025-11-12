@@ -2,66 +2,19 @@
 @using ApiContracts.UserFolder
 @using System.Reflection
 @inject BlazorApp.Services.IUserService UserService
+@inject NavigationManager navMgr 
 
 
 
-<h3>Add User (Test)</h3>
+<AuthorizeView> <Authorized>
+ <h3>Hello, @context.User.Identity!.Name</h3> 
+ </Authorized>
+  <NotAuthorized> 
+  lol you are not logged in!
+   </NotAuthorized> 
+   </AuthorizeView>
+    Here you can browse interesting posts. 
+    <button @onclick='() => navMgr.NavigateTo("loginpage")'>go to login</button>
 
-<div class="mb-3">
-  <label class="form-label">Username</label>
-  <input class="form-control" @bind="newUser.Username" placeholder="Enter username" />
-</div>
 
-<div class="mb-3">
-  <label class="form-label">Password</label>
-  <input class="form-control" type="password" @bind="passwordInput" placeholder="Enter password" />
-</div>
 
-<button class="btn btn-primary" @onclick="CreateUser">Create User</button>
-
-@if (!string.IsNullOrEmpty(message))
-{
-  <p>@message</p>
-}
-
-@code {
-   private string? message;
-    private CreateUserDto newUser = new()
-    {
-        Username = string.Empty,
-        Password = 0
-    };
-    private string? passwordInput;
-
-    private async Task CreateUser()
-    {
-        try
-        {
-            // If your DTO expects a numeric password, convert it
-            if (int.TryParse(passwordInput, out int parsedPassword))
-            {
-                newUser.Password = parsedPassword;
-            }
-            else
-            {
-                message = "❌ Password must be a number.";
-                return;
-            }
-
-            var created = await UserService.AddUserAsync(newUser);
-            message = $"✅ User '{created.Username}' created successfully!";
-            
-            // Clear input fields
-            newUser = new()
-            {
-                Username = string.Empty,
-                Password = 0
-            };
-            passwordInput = string.Empty;
-        }
-        catch (Exception ex)
-        {
-            message = $"❌ Error: {ex.Message}";
-        }
-        }
-}

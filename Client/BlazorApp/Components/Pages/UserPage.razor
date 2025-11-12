@@ -2,13 +2,21 @@
 @inject BlazorApp.Services.IUserService UserService
 @using ApiContracts.UserFolder
 
-<h3>Add User (Test)</h3>
+<div class="mb-3">
+  <label class="form-label">Username</label>
+  <input class="form-control" @bind="newUser.Username" placeholder="Enter username" />
+</div>
 
-<button class="btn btn-primary" @onclick="CreateUser">Add User</button>
+<div class="mb-3">
+  <label class="form-label">Password</label>
+  <input class="form-control" type="password" @bind="passwordInput" placeholder="Enter password" />
+</div>
+
+<button class="btn btn-primary" @onclick="CreateUser">Create User</button>
 
 @if (!string.IsNullOrEmpty(message))
 {
-    <p>@message</p>
+  <p>@message</p>
 }
 
 @code {
@@ -31,12 +39,12 @@
             }
             else
             {
-                message = "❌ Password must be a number.";
+                message = " Password must be a number.";
                 return;
             }
 
             var created = await UserService.AddUserAsync(newUser);
-            message = $"✅ User '{created.Username}' created successfully!";
+            message = $" User '{created.Username}' created successfully!";
             
             // Clear input fields
             newUser = new()
@@ -48,7 +56,7 @@
         }
         catch (Exception ex)
         {
-            message = $"❌ Error: {ex.Message}";
+            message = $" Error: {ex.Message}";
         }
-}
-}
+        }
+        }

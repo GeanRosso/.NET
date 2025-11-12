@@ -31,6 +31,14 @@ Content-Type: application/json
 ### 
 DELETE {{WebAPI_HostAddress}}/User/1
 
+### Login
+POST http://localhost:5244/Auth
+Content-Type: application/json
+
+{
+  "userName": "GeanADM",
+  "password": 1991
+}
 
 
 
