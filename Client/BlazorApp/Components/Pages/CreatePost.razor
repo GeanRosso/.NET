@@ -1,4 +1,5 @@
 ﻿@page "/create-post"
+@attribute [Authorize]
 @using ApiContracts.PostFolder
 @using BlazorApp.Services
 @rendermode InteractiveServer
@@ -34,29 +35,62 @@
 }
 
 @code {
+     [CascadingParameter] public Task<AuthenticationState> State { get; set; } = default!;
+
     string title = "", body = "";
-    int authorUserId=0;
+    int? authorUserId = null;
     string? error;
     private string? message;
+    
+        protected override async Task OnInitializedAsync()
+    {
+        var authState = await State;
+        var user = authState.User;
+
+        if (user.Identity is null || !user.Identity.IsAuthenticated)
+        {
+            error = "You must be logged in.";
+            return;
+        }
+
+        
+        var idStr = user.Claims.SingleOrDefault(c => c.Type == "Id")?.Value;
+        if (!int.TryParse(idStr, out var uid))
+        {
+            error = "Cannot read your user id from claims.";
+            return;
+        }
+
+        authorUserId = uid;
+    }
 
     async Task AddPostAsync()
     {
-    try
+       if (authorUserId is null)
+        {
+            error = "You must be logged in.";
+            message = null;
+            return;
+        }
+
+        try
         {
             var added = await PostService.AddPostAsync(new CreatePostDto
             {
                 Title = title,
-                Body = body,
-                AuthorUserId = authorUserId
+                Body  = body,
+                AuthorUserId = authorUserId.Value
             });
 
-            message = $"✅ Post '{added.Title}' by user ID {added.AuthorUserId} created successfully!";
-            error = null; // clear previous error
+            message = $" Post '{added.Title}' created!";
+            error = null;
+            title = "";
+            body  = "";
         }
         catch (Exception ex)
         {
-            error = $"❌ {ex.Message}";
-            message = null; // clear previous message
+            error = $" {ex.Message}";
+            message = null;
         }
     }
 }

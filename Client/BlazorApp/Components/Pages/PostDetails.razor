@@ -1,7 +1,10 @@
 ﻿@page "/post/{Id:int}"
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
 @using BlazorApp.Services
 @using ApiContracts.CommentFolder
 @using ApiContracts.PostFolder
+
 @inject IPostService PostService
 @inject ICommentService commentService
 
@@ -18,7 +21,8 @@ else
         <p>@post.Body</p>
         <p><i>By @post.AuthorName (UserId: @post.AuthorUserId)</i></p>
     </div>
- <h5>Comments</h5>
+
+    <h5>Comments</h5>
 
     @if (comments.Any())
     {
@@ -37,16 +41,19 @@ else
         <p>No comments yet.</p>
     }
 
-    <h5>Add Comment</h5>
-    <div class="mb-2">
-        <label class="form-label">Author User Id</label>
-        <input class="form-control" type="number" @bind="newComment.AuthorUserId" />
-    </div>
-    <div class="mb-2">
-        <label class="form-label">Comment</label>
-        <textarea class="form-control" rows="3" @bind="newComment.Body"></textarea>
-    </div>
-    <button class="btn btn-primary" @onclick="AddComment">Add Comment</button>
+    <AuthorizeView>
+        <Authorized>
+            <h5>Add Comment</h5>
+            <div class="mb-2">
+                <label class="form-label">Comment</label>
+                <textarea class="form-control" rows="3" @bind="newComment.Body"></textarea>
+            </div>
+            <button class="btn btn-primary" @onclick="AddComment">Add Comment</button>
+        </Authorized>
+        <NotAuthorized>
+            <p class="text-muted">You must be logged in to comment.</p>
+        </NotAuthorized>
+    </AuthorizeView>
 
     @if (!string.IsNullOrEmpty(message))
     {
@@ -63,47 +70,65 @@ else
 
     private PostDto? post;
     private List<CommentDto> comments = new();
-    private CreateCommentDto newComment = new()
-    {
-        PostId =0,
-        AuthorUserId =0,
-        Body = ""
-    };
+
+    // We only bind the body; author id will come from claims
+    private CreateCommentDto newComment = new() { PostId = 0, AuthorUserId = 0, Body = "" };
+
     private string? message, error;
+
+    [CascadingParameter] public Task<AuthenticationState> State { get; set; } = default!;
+    private int? currentUserId;
 
     protected override async Task OnParametersSetAsync()
     {
+        // load post + comments
         post = await PostService.GetSingleAsync(Id);
-
         comments = await commentService.GetByPostIdAsync(Id);
 
-        // prepare form DTO
-        newComment = new CreateCommentDto
+        // set form defaults
+        newComment = new CreateCommentDto { PostId = Id, AuthorUserId = 0,Body = "" };
+
+        // read user id from claims (if logged in)
+        var auth = await State;
+        var user = auth.User;
+        if (user.Identity?.IsAuthenticated == true)
         {
-            PostId = Id,
-            AuthorUserId = 0, // user will type this (or set from auth later)
-            Body = ""
-        };
+            var idStr = user.Claims.SingleOrDefault(c => c.Type == "Id")?.Value;
+            if (int.TryParse(idStr, out var uid))
+                currentUserId = uid;
+        }
+        else
+        {
+            currentUserId = null;
+        }
     }
 
     private async Task AddComment()
     {
         try
         {
-            // ensure PostId is set (in case user navigated)
+            if (currentUserId is null)
+            {
+                error = "You must be logged in to comment.";
+                message = null;
+                return;
+            }
+
+            // ensure correct post + author ids
             newComment.PostId = Id;
+            newComment.AuthorUserId = currentUserId.Value;
 
             var added = await commentService.AddCommentAsync(newComment);
 
             // optimistic update
             comments.Insert(0, added);
             newComment.Body = "";
-            message = "✅ Comment added!";
+            message = " Comment added!";
             error = null;
         }
         catch (Exception ex)
         {
-            error = $"❌ {ex.Message}";
+            error = $" {ex.Message}";
             message = null;
         }
     }
