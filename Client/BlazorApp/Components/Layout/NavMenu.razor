@@ -1,4 +1,7 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using BlazorApp.Auth
+@inject AuthenticationStateProvider AuthProvider
+@inject NavigationManager NavMgr
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">BlazorApp</a>
     </div>
@@ -14,7 +17,19 @@
             </NavLink>
         </div>
 
-   
+   <AuthorizeView>
+    <Authorized>
+        <button class="btn btn-link text-danger" @onclick="LogoutAsync">Logout</button>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    private async Task LogoutAsync()
+    {
+        await ((SimpleAuthProvider)AuthProvider).Logout();
+        NavMgr.NavigateTo("/login", forceLoad: true);
+    }
+}
 <div class="nav-item px-3">
     <NavLink class="nav-link" href="/user">
         <span class="oi oi-plus" aria-hidden="true"></span> Create User
